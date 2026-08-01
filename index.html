@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>congrats — 中村駿吾さん ご栄転</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@300;400;500;700&family=Zen+Old+Mincho:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#15141B; --panel:#1C1B24; --line:#332F3E;
+  --amber:#E8A33D; --amber-dim:#8A6528;
+  --text:#DBD5C7; --muted:#7E7789;
+  --user:#8FA6D8; --ok:#7FB88A; --seal:#C0453B;
+  --mono:"M PLUS 1 Code",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --mincho:"Zen Old Mincho","Yu Mincho","Hiragino Mincho ProN",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--mono);font-weight:300;
+  font-size:13.5px;line-height:1.85;-webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:200;
+  background:repeating-linear-gradient(to bottom,rgba(255,255,255,.013) 0 1px,transparent 1px 3px);
+  mix-blend-mode:overlay;
+}
+
+#scroll{flex:1;overflow-y:auto;padding:26px 22px 8px}
+#scroll::-webkit-scrollbar{width:8px}
+#scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+.inner{max-width:920px;margin:0 auto}
+
+/* ウェルカムボックス */
+.wbox{position:relative;border:1px solid var(--amber-dim);border-radius:7px;
+  display:grid;grid-template-columns:0.92fr 1.08fr;margin:12px 0 24px}
+.wbox .legend{position:absolute;top:-.72em;left:18px;background:var(--bg);padding:0 9px;
+  color:var(--amber);font-size:11.5px;font-weight:500;letter-spacing:.09em}
+.wl{padding:22px 20px 20px;text-align:center;border-right:1px solid var(--amber-dim)}
+.wr{padding:22px 22px 20px}
+.hey{font-size:13.5px;font-weight:400;color:#E4DED0;letter-spacing:.02em}
+.hey b{font-family:var(--mincho);font-weight:900;font-size:23px;letter-spacing:.06em;
+  color:#F7F1E4;text-shadow:0 0 26px rgba(232,163,61,.32);vertical-align:-1px}
+.mascot{margin:17px auto 16px;display:block}
+.wl .meta{color:var(--muted);font-size:11.5px;line-height:1.8}
+.wl .meta em{font-style:normal;color:var(--amber-dim)}
+.wr h4{color:var(--amber);font-size:12.5px;font-weight:700;letter-spacing:.03em;margin-bottom:3px}
+.wr p{color:var(--text);font-size:12.5px;line-height:1.72;opacity:.9}
+.wr p code{color:var(--amber);font-weight:500;font-family:var(--mono)}
+.wr hr{border:0;border-top:1px solid var(--amber-dim);margin:13px 0}
+.wr .it{font-style:italic;color:var(--muted);font-size:12px}
+@media (max-width:720px){
+  .wbox{grid-template-columns:1fr}
+  .wl{border-right:0;border-bottom:1px solid var(--amber-dim)}
+}
+
+/* 行 */
+.row{margin:0 0 4px;white-space:pre-wrap;word-break:break-word}
+.gap{height:14px}
+.u{color:var(--user)}
+.u::before{content:"> ";color:var(--muted)}
+.a{padding-left:0}
+.a::before{content:"⏺ ";color:var(--amber)}
+.tool{color:var(--muted);font-size:12.5px}
+.tool::before{content:"⏺ ";color:var(--ok)}
+.res{color:var(--muted);font-size:12.5px;padding-left:2px}
+.res::before{content:"  ⎿  "}
+.dim{color:var(--muted)}
+.err{color:var(--seal)}
+.hi{color:var(--amber)}
+.msgbody{border-left:2px solid var(--amber-dim);padding:2px 0 2px 16px;margin:8px 0 4px 2px;line-height:2.05}
+.think{color:var(--amber)}
+
+/* 入力 */
+#dock{border-top:1px solid var(--line);background:var(--bg);padding:14px 22px 12px}
+.dockin{max-width:920px;margin:0 auto}
+.box{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:4px;padding:10px 13px}
+.box:focus-within{border-color:var(--amber-dim)}
+.box .cr{color:var(--amber)}
+#in{flex:1;background:none;border:0;outline:none;color:var(--text);font-family:var(--mono);
+  font-size:13.5px;font-weight:300;resize:none;line-height:1.7;max-height:120px}
+#in::placeholder{color:#55505F}
+.hint{display:flex;justify-content:space-between;font-size:11px;color:#55505F;margin-top:7px}
+#status .on{color:var(--ok)}
+#status .off{color:var(--amber-dim)}
+
+/* 上映モード */
+#show{position:fixed;inset:0;z-index:180;background:rgba(12,11,17,.985);display:none;
+  flex-direction:column;justify-content:center;align-items:center;padding:40px 28px;text-align:center}
+#show.on{display:flex}
+#show .who{font-size:13px;color:var(--amber);letter-spacing:.18em;margin-bottom:6px}
+#show .role{font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:38px}
+#show .body{font-family:var(--mincho);font-weight:700;font-size:clamp(19px,3.3vw,31px);
+  line-height:2.15;max-width:780px;white-space:pre-wrap;color:#F2ECE0}
+#show .nav{position:fixed;bottom:28px;font-size:11.5px;color:var(--muted)}
+#bar{position:fixed;top:0;left:0;height:2px;background:var(--amber);width:0}
+
+@media (max-width:640px){#scroll{padding:18px 14px 6px}#dock{padding:12px 14px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="scroll"><div class="inner" id="log"></div></div>
+
+<div id="dock"><div class="dockin">
+  <div class="box"><span class="cr">&gt;</span><textarea id="in" rows="1" placeholder="/messages と入力してみてください"></textarea></div>
+  <div class="hint"><span id="status"></span><span>Enter 送信 · Shift+Enter 改行</span></div>
+</div></div>
+
+<div id="show">
+  <div id="bar"></div>
+  <div class="who" id="sWho"></div>
+  <div class="role" id="sRole"></div>
+  <div class="body" id="sBody"></div>
+  <div class="nav"><span id="pos"></span> ／ ← → で移動 ／ Esc で終了</div>
+</div>
+
+<script>
+/* ============================================================
+   ▼▼▼ 書き換えるのはこのDATAだけ ▼▼▼
+   ============================================================ */
+const DATA = {
+  name:    "中村 駿吾",
+  eyebrow: "CONGRATULATIONS / 2026.08",
+  tenure:  "研修生 → 人財開発課 → ◯◯部　※異動先をここに",
+  seal:    "祝",
+  org:     "インターネット・アカデミー株式会社 人財開発課",
+  facts: [
+    "研修生として入り、人事としてキャリア採用を担うまでになった",
+    "小松からキャリア採用を引き継ぎ、そのまま自分の仕事にした",
+    "石本と組んで Claude Code / Claude Cowork の講座開発を進めた",
+    "2026年8月、新しい部署へ栄転。後輩の馬場が入れ替わりで人事に入る",
+  ],
+  messages: [
+    { id:"komatsu",  who:"小松",  role:"キャリア採用 前任 ／ 中村さんへ引き継いだ人",
+      body:"キャリア採用を引き継いだとき、正直まだ早いかもしれないと思っていました。\nでも気づいたら、私の知らない口説き方で候補者を惹きつけていましたね。\n新しい部署でも、あの粘り強さはそのまま通用します。おめでとう。" },
+    { id:"tsuyuki",  who:"露木 諒", role:"人財開発課 ／ 研修生のときから今までの上司",
+      body:"研修生だった頃の中村さんを、社内で一番よく覚えているのはたぶん私です。\nあの頃から、わからないことを「わかりません」と言えるのが強みでした。\nその素直さのまま人事になり、今回の異動につながりました。\n場所が変わっても、その一言だけは手放さないでください。" },
+    { id:"tago",     who:"田子",  role:"新卒採用担当",
+      body:"新卒とキャリアで担当は違ったのに、採用の相談にはいつも付き合ってくれましたね。\n席が離れても、たぶん私はまた相談しに行きます。そのときはよろしくお願いします。\nご栄転、おめでとうございます。" },
+    { id:"baba",     who:"馬場",  role:"後輩 ／ 8月から人事",
+      body:"入れ替わるような形で、8月から人事に入ります。\n中村さんが積み上げてきたものを引き受けるのは、正直まだ荷が重いです。\nでも同じ会社にいてくれるので、遠慮なく頼らせてもらいます。" },
+    { id:"ishimoto", who:"石本",  role:"教材開発 ／ Claude系講座を共同開発",
+      body:"Claudeの講座を二人であれこれ試しながら作った時間が、一番楽しかったです。\n詰まったときの「とりあえず動かしてみましょう」が、いつも突破口でした。\n部署が変わっても、また何か一緒に作りましょう。" },
+  ],
+};
+/* ============================================================ */
+
+const $=s=>document.querySelector(s);
+const log=$("#log"), scroll=$("#scroll"), input=$("#in");
+
+
+/* ---------- 出力ヘルパ ---------- */
+function line(text,cls){
+  const p=document.createElement("div");
+  p.className="row "+(cls||"");
+  p.textContent=text;
+  log.appendChild(p);
+  scroll.scrollTop=scroll.scrollHeight;
+  return p;
+}
+function html(h){
+  const d=document.createElement("div");
+  d.innerHTML=h; log.appendChild(d);
+  scroll.scrollTop=scroll.scrollHeight;
+  return d;
+}
+function gap(){ const d=document.createElement("div"); d.className="gap"; log.appendChild(d); }
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+/* ---------- ドット絵マスコット（色紙くん） ---------- */
+const PIX=[
+  ".AAAAAAAAAAAA.",
+  "AAAAAAAAAAAAAA",
+  "AAAAAAAAAAAAAA",
+  "AAADDAAAADDAAA",
+  "AAADDAAAADDAAA",
+  "AAAAAAAAAAAAAA",
+  "AAAADAAAADAAAA",
+  "AAAAADDDDAAAAA",
+  "AAAAAAAAAAAAAA",
+  "AAAAAAAAAASSAA",
+  "AAAAAAAAAASSAA",
+  ".AAAAAAAAAAAA.",
+];
+function mascot(px){
+  const w=PIX[0].length,h=PIX.length;
+  let r='<svg class="mascot" width="'+w*px+'" height="'+h*px+'" viewBox="0 0 '+w+' '+h+'" shape-rendering="crispEdges">';
+  const col={A:"var(--amber)",D:"var(--bg)",S:"var(--seal)"};
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+    const c=PIX[y][x]; if(c===".")continue;
+    r+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="'+col[c]+'"/>';
+  }
+  return r+"</svg>";
+}
+
+/* ---------- 初期表示 ---------- */
+html(
+ '<div class="wbox">'+
+   '<span class="legend">congrats v1.0.0</span>'+
+   '<div class="wl">'+
+     '<div class="hey">Welcome back, <b>'+esc(DATA.name)+'</b> さん！</div>'+
+     mascot(7)+
+     '<div class="meta">'+
+       esc(DATA.messages.length+" messages")+' · <em>'+esc(DATA.eyebrow)+'</em><br>'+
+       esc(DATA.org)+'<br>'+
+       esc(DATA.tenure)+'<br>'+
+       '~/congrats/'+esc(DATA.name.replace(/\s/g,""))+
+     '</div>'+
+   '</div>'+
+   '<div class="wr">'+
+     '<h4>読みかた</h4>'+
+     '<p><code>/messages</code> みんなの一覧<br>'+
+        '<code>/read 石本</code> ひとりぶんを開く<br>'+
+        '<code>/all</code> ぜんぶ通しで読む</p>'+
+     '<hr>'+
+     '<h4>この色紙について</h4>'+
+     '<p>'+esc(DATA.org)+'の5名から預かりました。<br>'+
+        '<code>/show</code> で全画面、1件ずつ流します。</p>'+
+     '<p class="it">/help ですべてのコマンド</p>'+
+   '</div>'+
+ '</div>'
+);
+line("ご栄転、おめでとうございます。みなさんからの言葉を預かっています。","a");
+line("/messages で一覧が出ます。名前をそのまま入力しても開きます。","dim");
+gap();
+
+$("#status").innerHTML='<span class="dim">コマンドで読めます · /help で一覧</span>';
+
+/* ---------- コマンド ---------- */
+const HELP=[
+  "/messages          預かっているメッセージの一覧",
+  "/read <名前>       その人のメッセージを開く（/read 石本）",
+  "/all               ぜんぶ通しで読む",
+  "/show              全画面で1件ずつ流す（プロジェクタ用）",
+  "/about             "+DATA.name+"さんについて残っている記録",
+  "/clear             画面を消す",
+  "名前だけ入力しても  その人のメッセージが開きます",
+];
+
+function cmdMessages(){
+  line('Glob(messages/*.md)',"tool");
+  line("Found "+DATA.messages.length+" files","res");
+  gap();
+  DATA.messages.forEach((m,i)=>{
+    line("  "+String(i+1).padStart(2,"0")+"  "+m.who+"  ("+m.role+")  → /read "+m.id,"dim");
+  });
+  gap();
+}
+function findMsg(q){
+  q=(q||"").trim();
+  if(!q) return null;
+  return DATA.messages.find(m=>m.id===q||m.who===q||m.who.replace(/\s/g,"")===q.replace(/\s/g,""))
+      || DATA.messages.find(m=>m.who.includes(q)||q.includes(m.who.split(" ")[0]));
+}
+function cmdRead(q){
+  const m=findMsg(q);
+  if(!m){ line("見つかりませんでした。/messages で一覧を出せます。","err"); gap(); return; }
+  line("Read(messages/"+m.id+".md)","tool");
+  line("Read "+m.body.split("\n").length+" lines","res");
+  html('<div class="row hi" style="margin-top:10px">'+esc(m.who)+' <span class="dim">'+esc(m.role)+'</span></div>'+
+       '<div class="msgbody">'+esc(m.body)+'</div>');
+  gap();
+}
+function cmdAll(){
+  line("Read(messages/*.md)","tool");
+  line("Read "+DATA.messages.length+" files","res");
+  gap();
+  DATA.messages.forEach(m=>{
+    html('<div class="row hi">'+esc(m.who)+' <span class="dim">'+esc(m.role)+'</span></div>'+
+         '<div class="msgbody">'+esc(m.body)+'</div>');
+    gap();
+  });
+}
+function cmdAbout(){
+  line("Read(profile.md)","tool");
+  line("Read "+DATA.facts.length+" lines","res");
+  gap();
+  DATA.facts.forEach(f=>line("  · "+f,"dim"));
+  gap();
+}
+
+/* ---------- 上映モード ---------- */
+let idx=0,timer=null;const DUR=9000;
+function paint(){
+  const m=DATA.messages[idx];
+  $("#sWho").textContent=m.who; $("#sRole").textContent=m.role;
+  $("#sBody").textContent=m.body; $("#pos").textContent=(idx+1)+" / "+DATA.messages.length;
+  const b=$("#bar"); b.style.transition="none"; b.style.width="0";
+  requestAnimationFrame(()=>{b.style.transition="width "+DUR+"ms linear";b.style.width="100%"});
+}
+function step(n){idx=(idx+n+DATA.messages.length)%DATA.messages.length;paint();clearInterval(timer);timer=setInterval(()=>step(1),DUR)}
+function openShow(){idx=0;$("#show").classList.add("on");paint();timer=setInterval(()=>step(1),DUR)}
+function closeShow(){$("#show").classList.remove("on");clearInterval(timer);input.focus()}
+document.addEventListener("keydown",e=>{
+  if(!$("#show").classList.contains("on"))return;
+  if(e.key==="Escape")closeShow();
+  if(e.key==="ArrowRight"||e.key===" "){e.preventDefault();step(1)}
+  if(e.key==="ArrowLeft")step(-1);
+});
+
+/* ---------- 入力 ---------- */
+function submit(raw){
+  const q=raw.trim(); if(!q)return;
+  line(q,"u"); gap();
+  if(q.startsWith("/")){
+    const [c,...rest]=q.slice(1).split(/\s+/);
+    const arg=rest.join(" ");
+    if(c==="help"){HELP.forEach(h=>line("  "+h,"dim"));gap();}
+    else if(c==="messages"||c==="ls")cmdMessages();
+    else if(c==="read"||c==="cat")cmdRead(arg);
+    else if(c==="all")cmdAll();
+    else if(c==="about")cmdAbout();
+    else if(c==="show"||c==="play"){line("上映モードを開きます。Esc で戻れます。","a");gap();openShow();}
+    else if(c==="clear"){log.innerHTML="";}
+    else {line("そんなコマンドはありません。/help をどうぞ。","err");gap();}
+    return;
+  }
+  // コマンド以外は、名前として解釈してみる
+  const m=findMsg(q);
+  if(m){ cmdRead(m.id); return; }
+  line("コマンドで操作してください。","a");
+  line("  /messages  みんなの一覧      /read 石本   ひとりぶんを開く","dim");
+  line("  /all       ぜんぶ通しで読む   /show        全画面で1件ずつ","dim");
+  gap();
+}
+input.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();const v=input.value;input.value="";input.style.height="auto";submit(v)}
+});
+input.addEventListener("input",()=>{input.style.height="auto";input.style.height=Math.min(input.scrollHeight,120)+"px"});
+input.focus();
+document.addEventListener("click",()=>{if(!$("#show").classList.contains("on"))input.focus()});
+</script>
+</body>
+</html>
