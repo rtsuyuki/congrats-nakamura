@@ -18,7 +18,8 @@
   --mincho:"Zen Old Mincho","Yu Mincho","Hiragino Mincho ProN",serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
+html{height:100%}
+body{height:100%;height:100dvh}
 body{
   background:var(--bg);color:var(--text);font-family:var(--mono);font-weight:300;
   font-size:13.5px;line-height:1.85;-webkit-font-smoothing:antialiased;
@@ -30,7 +31,7 @@ body::after{
   mix-blend-mode:overlay;
 }
 
-#scroll{flex:1;overflow-y:auto;padding:26px 22px 8px}
+#scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:26px 22px 8px;overscroll-behavior:contain}
 #scroll::-webkit-scrollbar{width:8px}
 #scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 .inner{max-width:920px;margin:0 auto}
@@ -74,6 +75,25 @@ body::after{
 .hi{color:var(--amber)}
 .msgbody{border-left:2px solid var(--amber-dim);padding:2px 0 2px 16px;margin:8px 0 4px 2px;line-height:2.05}
 .think{color:var(--amber)}
+.msgbody .ln{display:block;min-height:1.1em;opacity:0;animation:fi .5s ease forwards}
+@keyframes fi{to{opacity:1}}
+
+/* 一覧のタップ行 */
+.pick{display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  font-family:var(--mono);font-size:13px;font-weight:300;color:var(--text);
+  padding:7px 12px;border-radius:3px;border-left:2px solid transparent;line-height:1.6;
+  transition:background .15s,border-left-color .15s}
+.pick:hover{background:var(--panel);border-left-color:var(--amber)}
+.pick .no{color:var(--muted);margin-right:12px}
+.pick .ck{color:var(--ok);margin-left:10px;font-size:11.5px}
+.pick .yet{color:var(--amber-dim);margin-left:10px;font-size:11.5px}
+
+/* 締め */
+.fin{border:1px solid var(--amber-dim);border-radius:7px;padding:26px 22px 22px;text-align:center;margin:6px 0 8px}
+.fin .k{font-family:var(--mincho);font-weight:900;font-size:30px;color:var(--seal);
+  border:2px solid var(--seal);display:inline-block;padding:8px 12px;line-height:1;margin-bottom:16px}
+.fin .t{font-family:var(--mincho);font-weight:900;font-size:18px;color:#F2ECE0;letter-spacing:.08em}
+.fin .s{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.9}
 
 /* 入力 */
 #dock{border-top:1px solid var(--line);background:var(--bg);padding:14px 22px 12px}
@@ -85,22 +105,68 @@ body::after{
   font-size:13.5px;font-weight:300;resize:none;line-height:1.7;max-height:120px}
 #in::placeholder{color:#55505F}
 .hint{display:flex;justify-content:space-between;font-size:11px;color:#55505F;margin-top:7px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.chip{background:none;border:1px solid var(--line);color:var(--text);font-family:var(--mono);
+  font-size:12px;font-weight:300;padding:7px 14px;border-radius:14px;cursor:pointer;
+  transition:border-color .18s,color .18s,background .18s}
+.chip:hover{border-color:var(--amber-dim);color:var(--amber)}
+.chip.key{border-color:var(--amber-dim);color:var(--amber)}
+.chip.key:hover{background:var(--amber);color:var(--bg)}
 #status .on{color:var(--ok)}
 #status .off{color:var(--amber-dim)}
 
 /* 上映モード */
 #show{position:fixed;inset:0;z-index:180;background:rgba(12,11,17,.985);display:none;
-  flex-direction:column;justify-content:center;align-items:center;padding:40px 28px;text-align:center}
+  flex-direction:column;justify-content:center;align-items:center;padding:64px 24px 96px;text-align:center}
 #show.on{display:flex}
-#show .who{font-size:13px;color:var(--amber);letter-spacing:.18em;margin-bottom:6px}
-#show .role{font-size:11px;color:var(--muted);letter-spacing:.1em;margin-bottom:38px}
-#show .body{font-family:var(--mincho);font-weight:700;font-size:clamp(19px,3.3vw,31px);
-  line-height:2.15;max-width:780px;white-space:pre-wrap;color:#F2ECE0}
-#show .nav{position:fixed;bottom:28px;font-size:11.5px;color:var(--muted)}
+#show .who{font-size:13px;color:var(--amber);letter-spacing:.18em;margin-bottom:38px}
+#show .body{font-family:var(--mincho);font-weight:700;font-size:clamp(17px,3.3vw,31px);
+  line-height:2.05;max-width:780px;white-space:pre-wrap;color:#F2ECE0;
+  max-height:calc(100dvh - 210px);overflow-y:auto;padding:0 2px}
+#show .nav{position:fixed;bottom:26px;font-size:11.5px;color:var(--muted);display:flex;gap:20px;align-items:center}
+#show .nav button{background:none;border:1px solid var(--line);color:var(--amber);font-family:var(--mono);
+  font-size:15px;padding:6px 16px;border-radius:3px;cursor:pointer}
+#show .nav button:hover{border-color:var(--amber-dim)}
+#xshow{position:fixed;top:20px;right:22px;background:none;border:1px solid var(--line);
+  color:var(--muted);font-family:var(--mono);font-size:12px;padding:7px 14px;border-radius:3px;cursor:pointer}
+#xshow:hover{color:var(--amber);border-color:var(--amber-dim)}
+#show .body::-webkit-scrollbar{width:6px}
+#show .body::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
 #bar{position:fixed;top:0;left:0;height:2px;background:var(--amber);width:0}
 
-@media (max-width:640px){#scroll{padding:18px 14px 6px}#dock{padding:12px 14px}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:640px){
+  body{font-size:13px;line-height:1.8}
+  #scroll{padding:18px 14px 6px}
+  #dock{padding:10px 14px 10px}
+  .wl{padding:18px 16px 16px}
+  .wr{padding:18px 16px 16px}
+  .hey b{font-size:21px}
+  .mascot{width:80px;height:auto}
+  .wl .meta{font-size:11px}
+  .wr p,.wr h4{font-size:12px}
+  /* コマンドボタンは折り返さず横スクロール */
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-bottom:9px;
+    padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;padding:10px 16px;font-size:12.5px}
+  /* iOSで拡大されないよう16px */
+  #in{font-size:16px}
+  .box{padding:9px 12px}
+  .hint{font-size:10.5px}
+  .pick{padding:12px 10px;font-size:13px}
+  .pick .no{margin-right:10px}
+  .msgbody{padding-left:13px;line-height:2.0}
+  #show{padding:56px 18px 100px}
+  #show .who{margin-bottom:22px}
+  #show .body{line-height:1.95;max-height:calc(100dvh - 200px)}
+  #show .nav{bottom:20px;gap:14px}
+  #show .nav button{font-size:18px;padding:11px 26px}
+  #xshow{top:14px;right:14px;padding:9px 14px}
+  .fin{padding:22px 16px 18px}
+  .fin .k{font-size:26px}
+  .fin .t{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.msgbody .ln{opacity:1}}
 </style>
 </head>
 <body>
@@ -108,16 +174,19 @@ body::after{
 <div id="scroll"><div class="inner" id="log"></div></div>
 
 <div id="dock"><div class="dockin">
-  <div class="box"><span class="cr">&gt;</span><textarea id="in" rows="1" placeholder="/messages と入力してみてください"></textarea></div>
+  <div class="chips" id="chips"></div>
+  <div class="box"><span class="cr">&gt;</span><textarea id="in" rows="1" placeholder="下のボタンを押すか、コマンドを入力"></textarea></div>
   <div class="hint"><span id="status"></span><span>Enter 送信 · Shift+Enter 改行</span></div>
 </div></div>
 
 <div id="show">
   <div id="bar"></div>
+  <button id="xshow">閉じる</button>
   <div class="who" id="sWho"></div>
-  <div class="role" id="sRole"></div>
   <div class="body" id="sBody"></div>
-  <div class="nav"><span id="pos"></span> ／ ← → で移動 ／ Esc で終了</div>
+  <div class="nav">
+    <button id="sPrev">←</button><span id="pos"></span><button id="sNext">→</button>
+  </div>
 </div>
 
 <script>
@@ -127,27 +196,30 @@ body::after{
 const DATA = {
   name:    "中村 駿吾",
   eyebrow: "CONGRATULATIONS / 2026.08",
-  tenure:  "研修生 → 人財開発課 → ◯◯部　※異動先をここに",
+  tenure:  "研修生 → 人財開発課 → 法人インストラクター",
   seal:    "祝",
   org:     "インターネット・アカデミー株式会社 人財開発課",
   facts: [
     "研修生として入り、人事としてキャリア採用を担うまでになった",
-    "小松からキャリア採用を引き継ぎ、そのまま自分の仕事にした",
+    "キャリア採用を引き継ぎ、そのまま自分の仕事にした",
     "石本と組んで Claude Code / Claude Cowork の講座開発を進めた",
-    "2026年8月、新しい部署へ栄転。後輩の馬場が入れ替わりで人事に入る",
+    "社内にAI活用を広めた張本人。まわりが影響を受けて動き出した",
+    "2026年8月、法人インストラクターへ栄転",
   ],
+
   messages: [
-    { id:"komatsu",  who:"小松",  role:"キャリア採用 前任 ／ 中村さんへ引き継いだ人",
-      body:"キャリア採用を引き継いだとき、正直まだ早いかもしれないと思っていました。\nでも気づいたら、私の知らない口説き方で候補者を惹きつけていましたね。\n新しい部署でも、あの粘り強さはそのまま通用します。おめでとう。" },
-    { id:"tsuyuki",  who:"露木 諒", role:"人財開発課 ／ 研修生のときから今までの上司",
-      body:"研修生だった頃の中村さんを、社内で一番よく覚えているのはたぶん私です。\nあの頃から、わからないことを「わかりません」と言えるのが強みでした。\nその素直さのまま人事になり、今回の異動につながりました。\n場所が変わっても、その一言だけは手放さないでください。" },
-    { id:"tago",     who:"田子",  role:"新卒採用担当",
-      body:"新卒とキャリアで担当は違ったのに、採用の相談にはいつも付き合ってくれましたね。\n席が離れても、たぶん私はまた相談しに行きます。そのときはよろしくお願いします。\nご栄転、おめでとうございます。" },
-    { id:"baba",     who:"馬場",  role:"後輩 ／ 8月から人事",
-      body:"入れ替わるような形で、8月から人事に入ります。\n中村さんが積み上げてきたものを引き受けるのは、正直まだ荷が重いです。\nでも同じ会社にいてくれるので、遠慮なく頼らせてもらいます。" },
-    { id:"ishimoto", who:"石本",  role:"教材開発 ／ Claude系講座を共同開発",
-      body:"Claudeの講座を二人であれこれ試しながら作った時間が、一番楽しかったです。\n詰まったときの「とりあえず動かしてみましょう」が、いつも突破口でした。\n部署が変わっても、また何か一緒に作りましょう。" },
+    { id:"tsuyuki", who:"露木 諒",
+      body:"中村さん法人インスト室への栄転、誠におめでとうございます！\n1 on 1で配属の希望を伺った時に、法人インストでのディレクション、マネジメントの経験を求められていたことを思い出します……\n中村さんの教育への情熱や、部下育成への熱い思いは、市場的に見てもハイレベルであると感じます！（私もそこから学ばなければなと常々感じています……）\n中村さんは、1つの物事に熱中して中長期で結果を出すタイプだと思うので、キャリア採用を途中で止めてしまったのは心残りです。\n法人インストでその分輝いてきてください！" },
+    { id:"tago", who:"田子",
+      body:"新卒とキャリアで担当は違ったのに、採用の相談にはいつも付き合ってくれましたね。\n席が離れても、たぶん私はまた相談しに行きます。そのときはよろしくお願いします。\nご栄転、おめでとうございます。\n\n※ 本文はこれから差し替えます" },
+    { id:"baba", who:"馬場",
+      body:"栄転おめでとうございます！🎉\n研修中から配属後の今まで、いつも頼れる先輩として支えてくださり、本当にありがとうございます！\n私がIAに残ることができたことも、S級を取得できたことも、中村さんの存在があったからこそだと思っています。\nそして、オフィスではいつも周りを明るくしてくださり、唯一、挨拶勝負をしてくれる大切な存在です。\n毎日たくさん元気をいただいています！\n仕事も人としても尊敬するところしかなく、今のところ能力も人柄もLINEスタンプの保有数も、何一つ勝てる気がしません。\nなので、せめて挨拶の声の大きさか、LINEスタンプの保有数だけはいつか勝ちたいと思っています。\nこれからもたくさん頼らせてください！" },
+    { id:"ishimoto", who:"石本",
+      body:"法人インストへの異動、おめでとうございます。\nClaude系の講座開発、ありがとうございました。急にカリキュラム開発が必要になった業務でしたが、細かい部分まで1つ1つ確認しながら、柔軟に対応していただいたことで、スムーズに進み、とても助かりました。\nこれからはお客様により近い立場でご活躍されることになります。カリキュラム開発で得た知見を生かして、講師とカリキュラム開発との連携をさらに深めて、他社にできない教育を提供しましょう。さらなる活躍を応援します！" },
+    { id:"ryusei", who:"隆聖",
+      body:"中村さん法人インストラクターへのご栄転、おめでとうございます！\n\n中村さんとは出会って1年も経っていないはずなんですが、何年も一緒に仕事をしてきた感じがします……！\n\nclaudeなどAIをもっと仕事に取り入れようと思ったきっかけも、中村さんに教えてもらいましたね。\nAIを仕事に活用しようとする姿に、多くの刺激を今もいただいてます！\n僕にとってのAI大先生です！\n\n部署は違っても、なにか一緒に新しい仕事をやり遂げたいと思います！\n法人インストラクターとしてのさらなるご活躍を心から応援しています！" },
   ],
+
 };
 /* ============================================================ */
 
@@ -218,6 +290,7 @@ html(
      '<p><code>/messages</code> みんなの一覧<br>'+
         '<code>/read 石本</code> ひとりぶんを開く<br>'+
         '<code>/all</code> ぜんぶ通しで読む</p>'+
+     '<p style="margin-top:6px;font-size:11.5px;color:var(--muted)">下のボタンからも選べます。</p>'+
      '<hr>'+
      '<h4>この色紙について</h4>'+
      '<p>'+esc(DATA.org)+'の5名から預かりました。<br>'+
@@ -227,29 +300,67 @@ html(
  '</div>'
 );
 line("ご栄転、おめでとうございます。みなさんからの言葉を預かっています。","a");
-line("/messages で一覧が出ます。名前をそのまま入力しても開きます。","dim");
+line("下のボタンを押すと開きます。コマンドを打っても同じです。","dim");
 gap();
 
-$("#status").innerHTML='<span class="dim">コマンドで読めます · /help で一覧</span>';
+
+/* ---------- 状態 ---------- */
+const read=new Set();
+let finished=false;
+
+function updStatus(){
+  const left=DATA.messages.length-read.size;
+  $("#status").innerHTML = left>0
+    ? '<span class="dim">まだ読んでいない手紙が </span><span class="hi">'+left+'</span><span class="dim"> 通あります</span>'
+    : '<span class="dim">'+DATA.messages.length+'通、ぜんぶ読み終わりました</span>';
+}
+
+const CHIPS=[
+  {l:"みんなの一覧",c:"/messages",key:true},
+  {l:"ぜんぶ読む",c:"/all"},
+  {l:"1通ずつ大きく",c:"/show"},
+  {l:"中村さんの記録",c:"/about"},
+  {l:"ヘルプ",c:"/help"},
+];
+function renderChips(){
+  const box=$("#chips"); box.innerHTML="";
+  CHIPS.forEach(x=>{
+    const b=document.createElement("button");
+    b.className="chip"+(x.key?" key":""); b.textContent=x.l;
+    b.onclick=()=>submit(x.c);
+    box.appendChild(b);
+  });
+}
+renderChips(); updStatus();
 
 /* ---------- コマンド ---------- */
 const HELP=[
-  "/messages          預かっているメッセージの一覧",
-  "/read <名前>       その人のメッセージを開く（/read 石本）",
+  "/messages          預かっている手紙の一覧",
+  "/read 石本         ひとりぶんを開く",
   "/all               ぜんぶ通しで読む",
-  "/show              全画面で1件ずつ流す（プロジェクタ用）",
+  "/show              1通ずつ大きく表示（スワイプで移動）",
+  "/show auto         9秒ずつ自動でめくる",
   "/about             "+DATA.name+"さんについて残っている記録",
   "/clear             画面を消す",
-  "名前だけ入力しても  その人のメッセージが開きます",
+  "名前だけ入力しても  その人の手紙が開きます",
 ];
 
 function cmdMessages(){
   line('Glob(messages/*.md)',"tool");
   line("Found "+DATA.messages.length+" files","res");
   gap();
+  const wrap=document.createElement("div");
   DATA.messages.forEach((m,i)=>{
-    line("  "+String(i+1).padStart(2,"0")+"  "+m.who+"  ("+m.role+")  → /read "+m.id,"dim");
+    const b=document.createElement("button");
+    b.className="pick";
+    b.innerHTML='<span class="no">'+String(i+1).padStart(2,"0")+'</span>'+esc(m.who)+
+      (read.has(m.id)?'<span class="ck">✓ 読みました</span>':'<span class="yet">未読</span>');
+    b.onclick=()=>submit(m.who);
+    wrap.appendChild(b);
   });
+  log.appendChild(wrap); scroll.scrollTop=scroll.scrollHeight;
+  gap();
+  line("押すとその手紙が開きます。","dim");
   gap();
 }
 function findMsg(q){
@@ -258,24 +369,35 @@ function findMsg(q){
   return DATA.messages.find(m=>m.id===q||m.who===q||m.who.replace(/\s/g,"")===q.replace(/\s/g,""))
       || DATA.messages.find(m=>m.who.includes(q)||q.includes(m.who.split(" ")[0]));
 }
+function bodyHTML(t){
+  return t.split("\n").map((l,i)=>
+    '<span class="ln" style="animation-delay:'+Math.min(i*90,900)+'ms">'+(l?esc(l):"&nbsp;")+'</span>'
+  ).join("");
+}
 function cmdRead(q){
   const m=findMsg(q);
-  if(!m){ line("見つかりませんでした。/messages で一覧を出せます。","err"); gap(); return; }
+  if(!m){
+    line("その名前は見つかりませんでした。","a");
+    line("一覧から選ぶこともできます。","dim"); gap(); cmdMessages(); return;
+  }
   line("Read(messages/"+m.id+".md)","tool");
   line("Read "+m.body.split("\n").length+" lines","res");
-  html('<div class="row hi" style="margin-top:10px">'+esc(m.who)+' <span class="dim">'+esc(m.role)+'</span></div>'+
-       '<div class="msgbody">'+esc(m.body)+'</div>');
+  html('<div class="row hi" style="margin-top:10px">'+esc(m.who)+'</div>'+
+       '<div class="msgbody">'+bodyHTML(m.body)+'</div>');
   gap();
+  read.add(m.id); updStatus(); checkFinish();
 }
 function cmdAll(){
   line("Read(messages/*.md)","tool");
   line("Read "+DATA.messages.length+" files","res");
   gap();
   DATA.messages.forEach(m=>{
-    html('<div class="row hi">'+esc(m.who)+' <span class="dim">'+esc(m.role)+'</span></div>'+
-         '<div class="msgbody">'+esc(m.body)+'</div>');
+    html('<div class="row hi">'+esc(m.who)+'</div>'+
+         '<div class="msgbody">'+bodyHTML(m.body)+'</div>');
     gap();
+    read.add(m.id);
   });
+  updStatus(); checkFinish();
 }
 function cmdAbout(){
   line("Read(profile.md)","tool");
@@ -284,19 +406,67 @@ function cmdAbout(){
   DATA.facts.forEach(f=>line("  · "+f,"dim"));
   gap();
 }
+function checkFinish(){
+  if(finished || read.size<DATA.messages.length) return;
+  finished=true;
+  setTimeout(()=>{
+    line("これで全部です。","a");
+    gap();
+    html('<div class="fin">'+
+      '<div class="k">'+esc(DATA.seal)+'</div>'+
+      '<div class="t">ご栄転、おめでとうございます</div>'+
+      '<div class="s">'+esc(DATA.org)+' 一同<br>'+
+      DATA.messages.map(m=>esc(m.who)).join(' ／ ')+'</div>'+
+    '</div>');
+    gap();
+    line("いつでもこのURLから読み返せます。","dim");
+    gap();
+  },600);
+}
 
-/* ---------- 上映モード ---------- */
-let idx=0,timer=null;const DUR=9000;
+/* ---------- 1通ずつ表示 ---------- */
+let idx=0,timer=null,auto=false;const DUR=9000;
 function paint(){
   const m=DATA.messages[idx];
-  $("#sWho").textContent=m.who; $("#sRole").textContent=m.role;
-  $("#sBody").textContent=m.body; $("#pos").textContent=(idx+1)+" / "+DATA.messages.length;
-  const b=$("#bar"); b.style.transition="none"; b.style.width="0";
-  requestAnimationFrame(()=>{b.style.transition="width "+DUR+"ms linear";b.style.width="100%"});
+  $("#sWho").textContent=m.who;
+  $("#sBody").textContent=m.body;
+  $("#pos").textContent=(idx+1)+" / "+DATA.messages.length;
+  $("#sBody").scrollTop=0;
+  read.add(m.id); updStatus();
+  const b=$("#bar");
+  b.style.transition="none"; b.style.width="0";
+  if(auto) requestAnimationFrame(()=>{b.style.transition="width "+DUR+"ms linear";b.style.width="100%"});
 }
-function step(n){idx=(idx+n+DATA.messages.length)%DATA.messages.length;paint();clearInterval(timer);timer=setInterval(()=>step(1),DUR)}
-function openShow(){idx=0;$("#show").classList.add("on");paint();timer=setInterval(()=>step(1),DUR)}
-function closeShow(){$("#show").classList.remove("on");clearInterval(timer);input.focus()}
+function step(n){
+  const last=idx===DATA.messages.length-1;
+  if(n>0 && last){ closeShow(); return; }
+  idx=(idx+n+DATA.messages.length)%DATA.messages.length;
+  paint();
+  if(auto){clearInterval(timer);timer=setInterval(()=>step(1),DUR)}
+}
+function openShow(a){
+  auto=!!a; idx=0; $("#show").classList.add("on"); paint();
+  if(auto) timer=setInterval(()=>step(1),DUR);
+}
+function closeShow(){
+  $("#show").classList.remove("on"); clearInterval(timer);
+  checkFinish(); input.focus();
+}
+$("#xshow").onclick=closeShow;
+$("#sPrev").onclick=()=>step(-1);
+$("#sNext").onclick=()=>step(1);
+// スワイプで前後（縦スクロールとは干渉させない）
+(function(){
+  const el=$("#show"); let x0=null,y0=null;
+  el.addEventListener("touchstart",e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  el.addEventListener("touchend",e=>{
+    if(x0===null)return;
+    const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0;
+    x0=null;
+    if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.6) step(dx<0?1:-1);
+  },{passive:true});
+})();
+
 document.addEventListener("keydown",e=>{
   if(!$("#show").classList.contains("on"))return;
   if(e.key==="Escape")closeShow();
@@ -316,17 +486,23 @@ function submit(raw){
     else if(c==="read"||c==="cat")cmdRead(arg);
     else if(c==="all")cmdAll();
     else if(c==="about")cmdAbout();
-    else if(c==="show"||c==="play"){line("上映モードを開きます。Esc で戻れます。","a");gap();openShow();}
+    else if(c==="show"||c==="play"){
+      const a=/auto|自動/.test(arg);
+      line(a?"9秒ずつ自動でめくります。閉じるボタンで戻れます。"
+            :"1通ずつ大きく表示します。左右スワイプか ← → で進みます。","a");
+      gap(); openShow(a);
+    }
     else if(c==="clear"){log.innerHTML="";}
-    else {line("そんなコマンドはありません。/help をどうぞ。","err");gap();}
+    else {
+      line("そのコマンドは用意していませんでした。","a");
+      line("下のボタンからも選べます。/help で一覧が出ます。","dim"); gap();
+    }
     return;
   }
-  // コマンド以外は、名前として解釈してみる
   const m=findMsg(q);
   if(m){ cmdRead(m.id); return; }
-  line("コマンドで操作してください。","a");
-  line("  /messages  みんなの一覧      /read 石本   ひとりぶんを開く","dim");
-  line("  /all       ぜんぶ通しで読む   /show        全画面で1件ずつ","dim");
+  line("受け取りました。ここはコマンドで動く画面なので、うまく返事ができません。","a");
+  line("下のボタンか、読みたい人の名前を入力してみてください。","dim");
   gap();
 }
 input.addEventListener("keydown",e=>{
@@ -334,7 +510,11 @@ input.addEventListener("keydown",e=>{
 });
 input.addEventListener("input",()=>{input.style.height="auto";input.style.height=Math.min(input.scrollHeight,120)+"px"});
 input.focus();
-document.addEventListener("click",()=>{if(!$("#show").classList.contains("on"))input.focus()});
+document.addEventListener("click",e=>{
+  if($("#show").classList.contains("on"))return;
+  if(e.target.closest("#dock")||e.target.closest(".pick"))return;
+  if(window.innerWidth>720) input.focus();
+});
 </script>
 </body>
 </html>
